@@ -182,19 +182,11 @@ td button {
 /* Vermelho: cancelar */
 
 /* ===== CAMPO DE PESQUISA ADICIONAL ===== */
-.campo-pesquisa {
-	width: 120px;
-	/* Largura do input */
-	padding: 6px 10px;
-	/* Espaçamento interno */
-	margin: 10px 0;
-	/* Espaçamento acima/abaixo */
-	border: 1px solid #ccc;
-	/* Borda cinza */
-	border-radius: 6px;
-	/* Cantos arredondados */
-	box-sizing: border-box;
-	/* Padding incluso na largura */
+.campo-pesquisa {                  /* Aplica estilo a todos os inputs/botões de pesquisa */
+    padding: 6px 10px;             /* Espaçamento interno: 6px topo/baixo e 10px esquerda/direita */
+    border: 1px solid #ccc;        /* Borda cinza clara ao redor do elemento */
+    border-radius: 6px;            /* Cantos arredondados com raio de 6px */
+    font-size: 12px;               /* Tamanho da fonte dentro do elemento */
 }
 
 /* ===== BOTÕES GERAIS ===== */

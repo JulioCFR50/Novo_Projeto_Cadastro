@@ -13,33 +13,67 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-const nfPesquisa = document.getElementById('nfPesquisa');
-const clientePesquisa = document.getElementById('clientePesquisa');
+// Campos de pesquisa separados
+const pesquisaNF = document.getElementById('pesquisaNF');
+const pesquisaCliente = document.getElementById('pesquisaCliente');
+const pesquisaUF = document.getElementById('pesquisaUF');
 
-// Filtro por NF e Cliente
-function filtrarTabela() {
-  const nfFiltro = nfPesquisa.value.trim().toLowerCase();
-  const clienteFiltro = clientePesquisa.value.trim().toLowerCase();
+// Filtro em tempo real para todos os campos
+function aplicarFiltros() {
+  const termoNF = pesquisaNF.value.trim().toLowerCase();
+  const termoCliente = pesquisaCliente.value.trim().toLowerCase();
+  const termoUF = pesquisaUF.value.trim().toLowerCase();
+
   const linhas = document.querySelectorAll('#tabelaNF tbody tr');
 
   linhas.forEach(linha => {
-    const numero = linha.children[1].textContent.toLowerCase();
-    const cliente = linha.children[4].textContent.toLowerCase();
-    linha.style.display = (numero.includes(nfFiltro) && cliente.includes(clienteFiltro)) ? '' : 'none';
+    const numeroNF = linha.children[1].textContent.toLowerCase();    // coluna NF
+    const nomeCliente = linha.children[4].textContent.toLowerCase(); // coluna Cliente
+    const uf = linha.children[5].textContent.toLowerCase();          // coluna UF
+
+    const condicao =
+      (termoNF === "" || numeroNF.includes(termoNF)) &&
+      (termoCliente === "" || nomeCliente.includes(termoCliente)) &&
+      (termoUF === "" || uf.includes(termoUF));
+
+    linha.style.display = condicao ? "" : "none";
   });
+
+  // Botão limpar filtros
+const btnLimpar = document.getElementById('limparFiltros');
+
+btnLimpar.addEventListener('click', () => {
+  // Limpa todos os campos
+  pesquisaNF.value = "";
+  pesquisaCliente.value = "";
+  pesquisaUF.value = "";
+
+  // Reaplica filtro (mostra todas as linhas)
+  aplicarFiltros();
+});
+
 }
 
-nfPesquisa.addEventListener('input', filtrarTabela);
-clientePesquisa.addEventListener('input', filtrarTabela);
+// Adicionar evento a cada input de pesquisa
+[pesquisaNF, pesquisaCliente, pesquisaUF].forEach(input => {
+  input.addEventListener('input', aplicarFiltros);
+});
 
-// Formatar data
+// Formatar data DD/MM/YYYY
 function formatDataBR(dataStr) {
   if (!dataStr) return "";
   const partes = dataStr.split('-');
   return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
-// Renderizar tabela
+// Converter data DD/MM/YYYY -> YYYY-MM-DD (para input)
+function formatDataInput(dataBR) {
+  if (!dataBR.includes('/')) return dataBR;
+  const partes = dataBR.split('/');
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+}
+
+// Renderizar tabela com dados do Firestore
 function renderTabela() {
   db.collection('notasFiscais').orderBy('data', 'desc').onSnapshot(snapshot => {
     const tbody = document.querySelector('#tabelaNF tbody');
@@ -48,7 +82,9 @@ function renderTabela() {
     snapshot.forEach(doc => {
       const d = doc.data();
       const id = doc.id;
-      const valorFormatado = d.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      const valorFormatado = d.valor
+        ? d.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+        : "0,00";
 
       const tr = document.createElement('tr');
       tr.innerHTML = `
@@ -72,11 +108,11 @@ function renderTabela() {
     });
 
     addEventListeners();
-    filtrarTabela(); // aplica filtro automaticamente após renderizar
+    aplicarFiltros(); // reaplica filtros quando tabela atualiza
   });
 }
 
-// Adicionar eventos aos botões
+// Adicionar eventos aos botões Editar e Excluir
 function addEventListeners() {
   document.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', () => editarNF(btn.dataset.id));
@@ -91,7 +127,6 @@ function addEventListeners() {
 function editarNF(id) {
   const tr = document.querySelector(`button[data-id="${id}"]`).closest('tr');
   const tds = tr.querySelectorAll('td');
-
   const valores = Array.from(tds).map(td => td.textContent);
 
   tr.innerHTML = `
@@ -147,12 +182,5 @@ function excluirNF(id) {
   }
 }
 
-// Converter data DD/MM/YYYY -> YYYY-MM-DD
-function formatDataInput(dataBR) {
-  if (!dataBR.includes('/')) return dataBR;
-  const partes = dataBR.split('/');
-  return `${partes[2]}-${partes[1]}-${partes[0]}`;
-}
-
-// Inicializar
+// Inicializar tabela
 renderTabela();

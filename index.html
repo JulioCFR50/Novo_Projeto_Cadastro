@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Nota Fiscal</title>
-    <!-- Fonte Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -15,7 +14,7 @@
         }
         .container {
             max-width: 1100px;
-            margin: 40px auto 80px auto; /* espaço inferior para o footer */
+            margin: 40px auto 80px auto;
             padding: 20px;
             background: rgba(255, 255, 255, 0.60);
             border-radius: 5px;     
@@ -85,6 +84,18 @@
             text-align: center;
             margin-top: 15px;
         }
+        /* Campo de pesquisa */
+        .search-box {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .search-box input {
+            width: 60%;
+            padding: 8px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            font-size: 14px;
+        }
         /* Footer */
         footer {
             text-align: center;
@@ -117,67 +128,44 @@
 </head>
 <body>
     <div class="container">
-        <h1>Ocorrência de Nota Fiscal</h1>
-        <a href="lista.html" class="btn">Ver Lista de NFs</a>
+        <h1>Cadastrar Nota Fiscal</h1>
+        <a href="lista.html"><button>Ver Lista de NFs</button></a>
+
+       
         <h2>Cadastro</h2>
         <form id="formCadastro">
-            <div>
-                <label for="transportadora">Transportadora</label>
-                <input type="text" id="transportadora" required>
-            </div>
-            <div>
-                <label for="numeroNF">Número da NF</label>
-                <input type="text" id="numeroNF" required>
-            </div>
-            <div>
-                <label for="valorNF">Valor</label>
-                <input type="text" id="valorNF" placeholder="ex: 1.234,56" required>
-            </div>
-            <div>
-                <label for="dataNF">Data</label>
-                <input type="date" id="dataNF" required>
-            </div>
-            <div>
-                <label for="cliente">Cliente</label>
-                <input type="text" id="cliente" required>
-            </div>
-            <div>
-                <label for="uf">UF</label>
-                <input type="text" id="uf" maxlength="2" required>
-            </div>
-            <div>
-                <label for="motivo">Motivo</label>
-                <input type="text" id="motivo">
-            </div>
-            <div>
-                <label for="acao">Ação</label>
-                <input type="text" id="acao">
-            </div>
-            <div>
-                <label for="nfEntrada">NF Entrada</label>
-                <input type="text" id="nfEntrada">
-            </div>
-            <div>
-                <label for="arm">ARM</label>
-                <input type="text" id="arm">
-            </div>
-            <div>
-                <label for="status">Status</label>
-                <select id="status" required>
-                    <option value="">-- Status --</option>
-                    <option value="pendente">Pendente</option>
-                    <option value="em_andamento">Em andamento</option>
-                    <option value="finalizado">Finalizado</option>
-                </select>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn">Salvar</button>
-            </div>
-            
+            <input type="text" id="transportadora" placeholder="Transportadora" required>
+            <input type="text" id="numeroNF" placeholder="Número da NF" required>
+            <input type="text" id="valorNF" placeholder="Valor (ex: 1.234,56)" required>
+            <input type="date" id="dataNF" required>
+            <input type="text" id="cliente" placeholder="Cliente" required>
+            <input type="text" id="uf" placeholder="UF" maxlength="2" required>
+            <input type="text" id="motivo" placeholder="Motivo">
+            <input type="text" id="acao" placeholder="Ação">
+            <input type="text" id="nfEntrada" placeholder="NF Entrada">
+            <input type="text" id="arm" placeholder="ARM">
+            <select id="status" required>
+                <option value="">-- Status --</option>
+                <option value="pendente">Pendente</option>
+                <option value="em_andamento">Em andamento</option>
+                <option value="finalizado">Finalizado</option>
+            </select>
+            <button type="submit">Salvar</button>
         </form>
     </div>
-    <footer>
-    &copy; 2025 - Sistema de Ocorrência de NF     
-    </footer>    
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="cadastro.js"></script>
+
+    <script>
+        // Exemplo: capturar o que o usuário digita
+        document.getElementById('pesquisaCliente').addEventListener('input', function() {
+            const termo = this.value.toLowerCase();
+            console.log("Pesquisando cliente:", termo);
+            // Aqui você pode chamar o Firestore e filtrar clientes
+        });
+    </script>
 </body>
 </html>
