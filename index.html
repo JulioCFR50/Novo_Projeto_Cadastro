@@ -1,139 +1,148 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Nota Fiscal</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
+<!DOCTYPE html> <!-- Define o tipo de documento como HTML5 -->
+<html lang="pt-br"> <!-- Define o idioma da página como português do Brasil -->
+   <head>
+      <meta charset="UTF-8" /> <!-- Define a codificação como UTF-8 (suporta acentos e caracteres especiais) -->
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Garante compatibilidade com Internet Explorer -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Faz a página se adaptar a dispositivos móveis -->
+      <meta name="description" content="Pagina Cadastro"> <!-- Descrição da página (SEO) -->
+      <meta name="author" content="Julio Cesar"> <!-- Autor da página -->
+      <title>Cadastrar Nota Fiscal</title> <!-- Título exibido na aba do navegador -->
+      <link rel="stylesheet" href="style.css"> <!-- Importa o arquivo CSS externo -->
+
+      <style>
+         /* CSS interno para estilização da página */
+         body { /* Define a fonte, remove margens/paddings e adiciona imagem de fundo */
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             background: url('coqueiral.png') no-repeat center center/cover;
-        }
-        .container {
+         }
+
+         .container { /* Define o container principal */
             max-width: 1100px;
             margin: 40px auto 80px auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.60);
+            background: rgba(255, 255, 255, 0.60); /* Fundo branco translúcido */
             border-radius: 5px;     
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra */
+         }
+
+         h1 { /* Estilo para o título principal */
             font-size: 28px;
             font-weight: 600;
             color: #333;
             margin-bottom: 10px;
-        }
-        h2 {
+         }
+
+         h2 { /* Subtítulo */
             font-size: 20px;
             margin-bottom: 20px;
             color: #555;
-        }
-        .btn {
+         }
+
+         .btn { /* Estiliza os botões */
             display: inline-block;
             background: #007bff;
             color: white;
-            padding: 10px 20px;
+            padding: 5px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
             transition: 0.3s;
             text-decoration: none;
             font-size: 14px;
-        }
-        .btn:hover {
+         }
+
+         .btn:hover { /* Cor ao passar o mouse */
             background: #0056b3;
-        }
-        form {
+         }
+
+         form { /* Layout do formulário em grid */
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-        }
-        label {
+         }
+
+         label {
             font-weight: 600;
             font-size: 14px;
             margin-bottom: 4px;
             display: block;
-        }
-        input, select {
+         }
+
+         input, select { /* Campos do formulário */
             width: 100%;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 14px;
             transition: 0.2s;
-        }
-        input:focus, select:focus {
+         }
+
+         input:focus, select:focus { /* Efeito ao focar no campo */
             border-color: #007bff;
             outline: none;
             box-shadow: 0 0 5px rgba(0,123,255,0.3);
-        }
-        #transportadora, #numeroNF, #valorNF, #dataNF, #cliente {
-            grid-column: span 1;
-        }
-        #uf, #motivo, #acao, #nfEntrada, #arm {
-            grid-column: span 1;
-        }
-        #status {
-            grid-column: span 2;
-        }
-        .form-actions {
+         }
+
+         /* Define o espaçamento de colunas para os campos */
+         #transportadora, #numeroNF, #valorNF, #dataNF, #cliente { grid-column: span 1; }
+         #uf, #motivo, #acao, #nfEntrada, #arm { grid-column: span 1; }
+         #status { grid-column: span 1; }
+
+         .form-actions { /* Botões do formulário centralizados */
             grid-column: span 4;
             text-align: center;
             margin-top: 15px;
-        }
-        /* Campo de pesquisa */
-        .search-box {
+         }
+
+         /* Campo de pesquisa (não está implementado no HTML, apenas estilizado) */
+         .search-box {
             margin: 20px 0;
             text-align: center;
-        }
-        .search-box input {
+         }
+         .search-box input {
             width: 60%;
             padding: 8px;
             border: 1px solid #aaa;
             border-radius: 8px;
             font-size: 14px;
-        }
-        /* Footer */
-        footer {
+         }
+
+         /* Footer fixado no rodapé */
+         footer {
             text-align: center;
             padding: 15px 0;
-            background: rgba(0,0,0,0.05);
+            background: rgba(0, 0, 0, 0.7);
             font-size: 14px;
-            color: #333;
+            color: rgba(255, 255, 255, 0.6);
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
-        }
-        @media (max-width: 900px) {
-            form {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            #status {
-                grid-column: span 2;
-            }
-        }
-        @media (max-width: 500px) {
-            form {
-                grid-template-columns: 1fr;
-            }
-            .form-actions {
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Cadastrar Nota Fiscal</h1>
-        <a href="lista.html"><button>Ver Lista de NFs</button></a>
+         }
 
-       
-        <h2>Cadastro</h2>
-        <form id="formCadastro">
+         /* Responsividade */
+         @media (max-width: 900px) {
+            form { grid-template-columns: repeat(2, 1fr); }
+            #status { grid-column: span 2; }
+         }
+         @media (max-width: 500px) {
+            form { grid-template-columns: 1fr; }
+            .form-actions { text-align: center; }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container"> <!-- Container principal -->
+         <h1>Cadastrar Nota Fiscal</h1>
+         <br>
+         <a href="lista.html"><button>Ver Lista de NFs</button></a><br> <!-- Link para lista de NFs -->
+         <br>
+
+         <!-- Formulário para cadastro da NF -->
+         <form id="formCadastro">
+            <!-- Campos do formulário -->
             <input type="text" id="transportadora" placeholder="Transportadora" required>
             <input type="text" id="numeroNF" placeholder="Número da NF" required>
             <input type="text" id="valorNF" placeholder="Valor (ex: 1.234,56)" required>
@@ -144,28 +153,51 @@
             <input type="text" id="acao" placeholder="Ação">
             <input type="text" id="nfEntrada" placeholder="NF Entrada">
             <input type="text" id="arm" placeholder="ARM">
+
+            <!-- Campo de seleção para status -->
             <select id="status" required>
-                <option value="">-- Status --</option>
-                <option value="pendente">Pendente</option>
-                <option value="em_andamento">Em andamento</option>
-                <option value="finalizado">Finalizado</option>
+               <option value="">-- Status --</option>
+               <option value="pendente">Pendente</option>
+               <option value="em_andamento">Em andamento</option>
+               <option value="finalizado">Finalizado</option>
             </select>
-            <button type="submit">Salvar</button>
-        </form>
-    </div>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-    <script src="cadastro.js"></script>
+            <!-- Botões de ação -->
+            <div class="form-actions">
+               <button type="submit" class="btn">Salvar</button> <!-- Envia o formulário -->
+               <button type="button" class="btn" onclick="limparCampos()">Limpar</button> <!-- Chama a função limparCampos() -->
+            </div>
+         </form>
+      </div>
 
-    <script>
-        // Exemplo: capturar o que o usuário digita
-        document.getElementById('pesquisaCliente').addEventListener('input', function() {
-            const termo = this.value.toLowerCase();
-            console.log("Pesquisando cliente:", termo);
-            // Aqui você pode chamar o Firestore e filtrar clientes
-        });
-    </script>
-</body>
+      <!-- Firebase: bibliotecas para conexão com banco Firestore -->
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+      <!-- Script externo para operações de cadastro -->
+      <script src="cadastro.js"></script>
+
+      <!-- Função para capturar pesquisa do cliente (ainda sem campo no HTML) -->
+      <script>
+         document.getElementById('pesquisaCliente')?.addEventListener('input', function() {
+             const termo = this.value.toLowerCase();
+             console.log("Pesquisando cliente:", termo);
+             // Aqui você pode chamar o Firestore e filtrar clientes
+         });
+      </script>
+
+      <!-- Função para limpar todos os campos do formulário -->
+      <script>
+         function limparCampos() {
+             if(confirm("Deseja realmente limpar todos os campos?")) {
+                 document.getElementById("formCadastro").reset();
+             }
+         }
+      </script>
+
+      <!-- Rodapé fixo -->
+      <footer>
+         &copy; 2025 Desenvolvido por Julio Cesar. Todos os direitos reservados.
+      </footer>
+   </body>
 </html>
