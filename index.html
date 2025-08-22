@@ -15,16 +15,16 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: url('coqueiral.png') no-repeat center center/cover;
+            background: url('coqueiral1.jpeg') no-repeat center center/cover; /* Imagem de fundo */
          }
 
          .container { /* Define o container principal */
-            max-width: 1100px;
-            margin: 40px auto 80px auto;
+            max-width: 1100px; /* Largura máxima */
+            margin: 40px auto 80px auto; /* Centraliza e dá espaçamento */
             padding: 20px;
             background: rgba(255, 255, 255, 0.60); /* Fundo branco translúcido */
             border-radius: 5px;     
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra leve */
          }
 
          h1 { /* Estilo para o título principal */
@@ -42,7 +42,7 @@
 
          .btn { /* Estiliza os botões */
             display: inline-block;
-            background: #007bff;
+            background: #007bff; /* Cor azul padrão */
             color: white;
             padding: 5px 20px;
             border: none;
@@ -59,7 +59,7 @@
 
          form { /* Layout do formulário em grid */
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 1fr); /* 4 colunas */
             gap: 20px;
          }
 
@@ -91,7 +91,7 @@
          #status { grid-column: span 1; }
 
          .form-actions { /* Botões do formulário centralizados */
-            grid-column: span 4;
+            grid-column: span 4; /* Ocupa toda a largura */
             text-align: center;
             margin-top: 15px;
          }
@@ -137,25 +137,24 @@
       <div class="container"> <!-- Container principal -->
          <h1>Ocorrências de Notas Fiscais</h1>
          <br>
-         <a href="lista.html"><button>Ver Lista de NFs</button></a><br> <!-- Link para lista de NFs -->
+         <a href="lista.html"><button>Ver Lista de NFs</button></a><br> <!-- Botão que leva para a lista -->
          <br>
 
          <!-- Formulário para cadastro da NF -->
          <form id="formCadastro">
             <!-- Campos do formulário -->
-            <input type="text" id="transportadora" placeholder="Transportadora" required>
-            <input type="text" id="numeroNF" placeholder="Número da NF" required>
-            <input type="text" id="valorNF" placeholder="Valor (ex: 1.234,56)" required>
-            <input type="date" id="dataNF" required>
-            <input type="text" id="cliente" placeholder="Cliente" required>
-            <input type="text" id="uf" placeholder="UF" maxlength="2" required>
-            <input type="text" id="motivo" placeholder="Motivo">
-            <input type="text" id="acao" placeholder="Ação">
-            <input type="text" id="nfEntrada" placeholder="NF Entrada">
-            <input type="text" id="arm" placeholder="ARM">
+            <input type="text" id="transportadora" placeholder="Transportadora" required> <!-- Nome da transportadora -->
+            <input type="text" id="numeroNF" placeholder="Número da NF" required> <!-- Número da Nota Fiscal -->
+            <input type="text" id="valorNF" placeholder="Valor (ex: 1.234,56)" required> <!-- Valor no formato BR -->
+            <input type="date" id="dataNF" required> <!-- Data da emissão -->
+            <input type="text" id="cliente" placeholder="Cliente" required> <!-- Nome do cliente -->
+            <input type="text" id="uf" placeholder="UF" maxlength="2" required> <!-- Estado (2 letras) -->
+            <input type="text" id="motivo" placeholder="Motivo"> <!-- Motivo da ocorrência -->
+            <input type="text" id="acao" placeholder="Ação"> <!-- Ação tomada -->
+            <input type="text" id="nfEntrada" placeholder="NF Entrada"> <!-- Número da NF de entrada -->
+            <input type="text" id="arm" placeholder="ARM"> <!-- Código ARM -->
 
             <!-- Campo de seleção para status -->
-            
             <select id="status" required>
                <option value="">-- Status --</option>
                <option value="pendente">Pendente</option>
@@ -165,15 +164,15 @@
 
             <!-- Botões de ação -->
             <div class="form-actions">
-               <button type="submit" class="btn">Salvar</button> <!-- Envia o formulário -->
-               <button type="button" class="btn" onclick="limparCampos()">Limpar</button> <!-- Chama a função limparCampos() -->
+               <button type="submit" class="btn">Salvar</button> <!-- Botão para enviar o formulário -->
+               <button type="button" class="btn" onclick="limparCampos()">Limpar</button> <!-- Botão para limpar os campos -->
             </div>
          </form>
       </div>
 
       <!-- Firebase: bibliotecas para conexão com banco Firestore -->
-      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script> <!-- Inicializa app Firebase -->
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script> <!-- Habilita Firestore -->
 
       <!-- Script externo para operações de cadastro -->
       <script src="cadastro.js"></script>
@@ -183,7 +182,7 @@
          document.getElementById('pesquisaCliente')?.addEventListener('input', function() {
              const termo = this.value.toLowerCase();
              console.log("Pesquisando cliente:", termo);
-             // Aqui você pode chamar o Firestore e filtrar clientes
+             // Aqui você poderia filtrar no Firestore
          });
       </script>
 

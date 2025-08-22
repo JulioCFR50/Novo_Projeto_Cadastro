@@ -1,38 +1,27 @@
-<!DOCTYPE html> <!-- Define que o documento segue o padrão HTML5 -->
-<html lang="pt-br"> <!-- Define o idioma da página como português -->
+<!DOCTYPE html>
+<html lang="pt-br">
    <head>
-      <meta charset="UTF-8"> <!-- Define a codificação do texto (UTF-8 suporta acentos) -->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva -->
-      <title>Lista de Notas Fiscais</title> <!-- Título exibido na aba do navegador -->
-      <link rel="stylesheet" href="style.css"> <!-- Importa arquivo CSS externo -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Lista de Notas Fiscais</title>
+      <link rel="stylesheet" href="style.css">
    </head>
    <body>
-      <div class="container"> <!-- Container principal que envolve todo o conteúdo -->
-         
-         <!-- Cabeçalho da página -->
+      <div class="container">
          <div class="container-header">
-            <h1>Lista de Notas Fiscais</h1> <!-- Título principal da página -->
-            
-            <!-- Área com botões e campos de pesquisa -->
+            <h1>Lista de Notas Fiscais</h1>
             <div class="header-actions">
-               <a href="index.html"><button>Cadastrar NF</button></a> <!-- Link para a página de cadastro -->
-               
-               <!-- Campos para pesquisar NF, Cliente e UF -->
-               <input type="text" id="pesquisaNF" placeholder="Pesquisar NF..." class="campo-pesquisa"> <!-- Pesquisa por número da NF -->
-               <input type="text" id="pesquisaCliente" placeholder="Pesquisar Cliente..." class="campo-pesquisa"> <!-- Pesquisa por cliente -->
-               <input type="text" id="pesquisaUF" placeholder="Pesquisar UF..." class="campo-pesquisa"> <!-- Pesquisa por UF -->
-               
-               <!-- Botão para limpar filtros de pesquisa -->
+               <a href="index.html"><button>Cadastrar NF</button></a>
+               <input type="text" id="pesquisaNF" placeholder="Pesquisar NF..." class="campo-pesquisa">
+               <input type="text" id="pesquisaCliente" placeholder="Pesquisar Cliente..." class="campo-pesquisa">
+               <input type="text" id="pesquisaUF" placeholder="Pesquisar UF..." class="campo-pesquisa">
                <button id="limparFiltros" class="campo-pesquisa">Limpar filtros</button>
             </div>
          </div>
-
-         <!-- Tabela para exibir as Notas Fiscais -->
          <div class="table-container">
             <table id="tabelaNF">
                <thead>
                   <tr>
-                     <!-- Cabeçalhos das colunas da tabela -->
                      <th>Transportadora</th>
                      <th>NF</th>
                      <th>Valor</th>
@@ -44,26 +33,21 @@
                      <th>NF Entrada</th>
                      <th>ARM</th>
                      <th>Status</th>
-                     <th>Ações</th> <!-- Coluna para editar ou excluir registros -->
+                     <th>Ações</th>
                   </tr>
                </thead>
                <tbody>
-                  <!-- Os dados serão carregados dinamicamente via Firebase (Firestore) -->
+                  <!-- Dados do Firebase -->
                </tbody>
             </table>
          </div>
-
-         <!-- Rodapé ou espaço para botões adicionais -->
          <div class="container-footer">
-            <!-- Conteúdo extra opcional -->
+            <!-- Botões adicionais ou informações fixas -->
          </div>
       </div>
-
-      <!-- Importação do Firebase para conectar com o banco de dados -->
-      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script> <!-- Inicializa app Firebase -->
-      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script> <!-- Habilita Firestore -->
-      
-      <!-- Script externo para manipular a lista (listar, pesquisar, excluir registros) -->
+      <!-- Firebase -->
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
       <script src="lista.js"></script>
    </body>
 </html>
